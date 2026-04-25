@@ -51,14 +51,41 @@
 
     main { position: relative; z-index: 2; }
 
-    header { padding: 32px 0; border-bottom: 1px solid var(--line); }
+    /* ========== STICKY HEADER ========== */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 239, 231, 0.82);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+    }
     header .container { display: flex; justify-content: space-between; align-items: center; }
     .mark { font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px; letter-spacing: -0.01em; }
     .mark em { font-style: italic; color: var(--accent); }
-    .nav-link { font-size: 14px; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
-    .nav-link:hover { color: var(--accent); }
 
-    .hero { padding: 120px 0 100px; }
+    .nav-cta {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      background: transparent;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      letter-spacing: -0.005em;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    .hero { padding: 100px 0 100px; }
     .hero-label {
       font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); font-weight: 500; margin-bottom: 32px;
@@ -183,19 +210,6 @@
     }
     .val-card.accent .val-body > p { color: rgba(244,239,231,0.85); }
 
-    .val-footnote {
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--line);
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 18px;
-      color: var(--ink-muted);
-      max-width: 720px;
-      line-height: 1.5;
-    }
-    .val-footnote strong { font-weight: 500; color: var(--ink); font-style: normal; }
-
     .author { padding: 120px 0; }
     .author-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
     .author h2 {
@@ -304,11 +318,11 @@
     @media (max-width: 768px) {
       .container { padding: 0 20px; }
 
-      header { padding: 22px 0; }
+      header { padding: 16px 0; }
       .mark { font-size: 15px; }
-      .nav-link { font-size: 13px; }
+      .nav-cta { font-size: 12px; padding: 7px 13px; }
 
-      .hero { padding: 64px 0 56px; }
+      .hero { padding: 56px 0 56px; }
       .hero-label { margin-bottom: 20px; font-size: 11px; letter-spacing: 0.18em; }
       .hero h1 { margin-bottom: 24px; letter-spacing: -0.025em; }
       .hero .lede { margin-bottom: 32px; }
@@ -318,7 +332,6 @@
       .framework-intro { margin-bottom: 40px; }
       .framework-intro h2 { margin-bottom: 16px; }
 
-      /* Keep 2x2 but tighten on tablet */
       .quadrant-wrap { grid-template-columns: 32px 1fr; gap: 10px; }
       .y-axis span { font-size: 10px; letter-spacing: 0.2em; }
       .quadrant { padding: 22px 18px; min-height: 180px; }
@@ -340,7 +353,6 @@
       .val-body h3 { font-size: 22px; }
       .val-tag { font-size: 11px; margin-bottom: 14px; }
       .val-body > p { font-size: 14px; line-height: 1.55; }
-      .val-footnote { font-size: 16px; margin-top: 32px; padding-top: 24px; }
       .credentials { margin-top: 24px; padding-top: 24px; gap: 18px; }
       .cred { grid-template-columns: 110px 1fr; gap: 16px; }
       .cred-label { font-size: 11px; }
@@ -364,8 +376,12 @@
     @media (max-width: 480px) {
       .container { padding: 0 18px; }
 
-      .hero { padding: 48px 0 40px; }
-      .hero h1 { font-size: 38px; line-height: 1.08; }
+      header { padding: 14px 0; }
+      .mark { font-size: 14px; }
+      .nav-cta { font-size: 11px; padding: 6px 11px; }
+
+      .hero { padding: 40px 0 40px; }
+      .hero h1 { font-size: 36px; line-height: 1.08; }
       .hero .lede { font-size: 17px; }
       .hero-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
       .hero-meta .dot { display: none; }
@@ -374,7 +390,6 @@
       .framework-intro { margin-bottom: 32px; }
       .framework-intro h2 { font-size: 24px; }
 
-      /* Stack quadrants on small phones for readability */
       .quadrant-wrap { grid-template-columns: 1fr; gap: 12px; }
       .y-axis { display: none; }
       .grid-inner { grid-template-columns: 1fr; border: none; background: transparent; }
@@ -397,7 +412,6 @@
       .val-num { font-size: 36px; margin-bottom: 8px; }
       .val-body > p { font-size: 14px; }
 
-      /* Stack credentials fully on small phones */
       .cred { grid-template-columns: 1fr; gap: 4px; }
       .cred-value { font-size: 15px; }
 
@@ -418,7 +432,7 @@
   <header>
     <div class="container">
       <div class="mark">Capital<em>·</em>Market Fit</div>
-      <a href="#book" class="nav-link">The Book →</a>
+      <a href="#book" class="nav-cta">The Book →</a>
     </div>
   </header>
 
@@ -440,7 +454,7 @@
   <section class="framework">
     <div class="container">
       <div class="framework-intro">
-        <div class="section-label">The Framework</div>
+        <div class="section-label">The CMF Framework</div>
         <h2>Product-Market Fit tells you if the market wants what you're building.</h2>
         <p>Capital-Market Fit tells you what kind of capital and exit valuation that market can actually support. Raise at a VC valuation your buyer pool can't support, and you've narrowed your exit to an unlikely outcome.</p>
       </div>
@@ -454,7 +468,7 @@
                 <div class="quadrant-head"><h3>Submarine</h3><span class="quadrant-id">02</span></div>
                 <div class="tag">Niche TAM · High defensibility</div>
               </div>
-              <p>Small markets with real moats. Bootstrapped and seed-strapped founders can  exit well. VC often breaks the math on the way in.</p>
+              <p>Small markets with real moats. Bootstrapped and seed-strapped founders can exit well. VC often breaks the math on the way in.</p>
             </div>
             <div class="quadrant accent">
               <div>
@@ -534,7 +548,7 @@
           <h2>A engineer and founder who built and exited <em>three different ways.</em></h2>
         </div>
         <div class="author-body">
-          <p>I'm an MIT and Stanford trained engineer and product builder at heart, not a finance bro.  So I've had to learn about money the hard way. I've built three companies across three different funding paths and luckily had multiple successful exits.</p>
+          <p>I'm an MIT and Stanford trained engineer and product builder at heart, not a finance bro. So I've had to learn about money the hard way. I've built three companies across three different funding paths and luckily had multiple successful exits.</p>
           <p>I wrote this book because many of the best founders I know are trapped in bad outcomes. It pains me to think that so many founders were misled by the venture narrative of simple go-big-or-go-home. I've built the funding, valuation, and exit framework I wish I'd had before my first pitch deck was ever made.</p>
 
           <div class="credentials">
