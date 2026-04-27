@@ -163,6 +163,9 @@
       color: var(--ink-muted); font-weight: 500; text-align: center;
     }
 
+    /* Mobile-only mini diagram - hidden by default */
+    .quadrant-mini { display: none; }
+
     /* VALUATION DIVIDE */
     .valuations {
       padding: 120px 0;
@@ -396,16 +399,92 @@
       .framework-intro { margin-bottom: 32px; }
       .framework-intro h2 { font-size: 24px; }
 
-      .quadrant-wrap { grid-template-columns: 1fr; gap: 12px; }
+      /* Hide the full 2x2 grid system on phones */
+      .quadrant-wrap { display: block; }
       .y-axis { display: none; }
-      .grid-inner { grid-template-columns: 1fr; border: none; background: transparent; }
+      .x-axis { display: none; }
+      .grid-inner { display: block; border: none; background: transparent; }
+
+      /* Show mini diagram instead */
+      .quadrant-mini {
+        display: block;
+        margin-bottom: 32px;
+      }
+      .qm-label-y {
+        font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--ink-muted); font-weight: 500; margin-bottom: 8px; text-align: center;
+      }
+      .qm-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--ink);
+        background: var(--paper);
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .qm-cell {
+        border: 1px solid var(--ink);
+        margin: -1px -1px 0 0;
+        padding: 14px 10px;
+        background: var(--paper);
+        text-align: center;
+        min-height: 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+      }
+      .qm-cell.accent { background: var(--ink); }
+      .qm-cell.accent .qm-name { color: var(--accent); }
+      .qm-name {
+        font-family: 'Fraunces', serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .qm-num {
+        font-size: 9px;
+        letter-spacing: 0.15em;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+      .qm-cell.accent .qm-num { color: rgba(244,239,231,0.5); }
+      .qm-axis-x {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 320px;
+        margin: 8px auto 0;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+      .qm-axis-x span { text-align: center; }
+      .qm-caption {
+        text-align: center;
+        font-family: 'Fraunces', serif;
+        font-style: italic;
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-top: 16px;
+        padding: 0 16px;
+      }
+
+      /* Style the stacked detail cards as expanded quadrants */
       .quadrant {
         min-height: auto;
         border: 1px solid var(--ink);
-        margin: 0;
+        margin: 0 0 12px 0;
+        padding: 22px 22px 24px;
+        position: relative;
       }
-      .quadrant p { font-size: 14px; }
-      .x-axis { display: none; }
+      .quadrant:last-child { margin-bottom: 0; }
+      .quadrant-head { margin-bottom: 8px; }
+      .quadrant h3 { font-size: 22px; }
+      .quadrant .tag { font-size: 12px; margin-bottom: 12px; }
+      .quadrant p { font-size: 14px; line-height: 1.5; }
 
       .author { padding: 48px 0; }
       .author h2 { font-size: 24px; }
@@ -438,7 +517,7 @@
   <header>
     <div class="container">
       <div class="mark">Capital<em>·</em>Market Fit</div>
-      <a href="#book" class="nav-cta">Read chapter 1 →</a>
+      <a href="#book" class="nav-cta">The Book →</a>
     </div>
   </header>
 
@@ -463,6 +542,33 @@
         <div class="section-label">The Framework</div>
         <h2>Product-Market Fit tells you if the market wants what you're building.</h2>
         <p>Capital-Market Fit tells you what kind of capital and exit valuation that market can actually support. Raise at a VC valuation your buyer pool can't support, and you've narrowed your exit to an unlikely outcome.</p>
+      </div>
+
+      <div class="quadrant-mini">
+        <div class="qm-label-y">↑ Larger Market</div>
+        <div class="qm-grid">
+          <div class="qm-cell">
+            <div class="qm-name">Submarine</div>
+            <div class="qm-num">02</div>
+          </div>
+          <div class="qm-cell accent">
+            <div class="qm-name">Rocketship</div>
+            <div class="qm-num">01</div>
+          </div>
+          <div class="qm-cell">
+            <div class="qm-name">Campervan</div>
+            <div class="qm-num">04</div>
+          </div>
+          <div class="qm-cell">
+            <div class="qm-name">Bumper Cars</div>
+            <div class="qm-num">03</div>
+          </div>
+        </div>
+        <div class="qm-axis-x">
+          <span>Low Defense</span>
+          <span>High Defense →</span>
+        </div>
+        <p class="qm-caption">Find your quadrant. Each one has a different funding playbook.</p>
       </div>
 
       <div class="quadrant-wrap">
